@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inconsolata:wght@600&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.12"></script>
+
+
+    <title>Calculator</title>
+</head>
+<body>
+    
+    <div id="app" v-cloak>
+        <div class="container align-v">
+            <div class="calc-box align-v align-h">
+                <div ref="display" class="header">
+                    <span ref="displayText" style="font-size:50px;">{{calc}}</span>
+                </div>
+                <div class="preview">
+                    <h2>{{preview}}</h2>
+                </div>
+                <div @click="clear()" class="num ac">AC</div>
+                <div @click="invert()" class="num invert">+/-</div>
+                <div @click="operate('%')" class="num percent">%</div>
+                <div @click="operate('/')" class="num divide">÷</div>
+                <div @click="addnumber('7')" class="num">7</div>
+                <div @click="addnumber('8')" class="num">8</div>
+                <div @click="addnumber('9')" class="num">9</div>
+                <div @click="addnumber('4')" class="num">4</div>
+                <div @click="addnumber('5')" class="num">5</div>
+                <div @click="addnumber('6')" class="num">6</div>
+                <div @click="addnumber('1')" class="num">1</div>
+                <div @click="addnumber('2')" class="num">2</div>
+                <div @click="addnumber('3')" class="num">3</div>
+                <div @click="addnumber('0')" class="num zero">0</div>
+                <div @click="addnumber('.')" class="num">.</div>
+                <div @click="operate('*')" class="num multiply">×</div>
+                <div @click="operate('-')" class="num substract">-</div>
+                <div @click="operate('+')" class="num add">+</div>
+                <div @click="equals()" class="num equal">=</div>
+            </div>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>

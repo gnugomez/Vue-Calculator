@@ -10,7 +10,7 @@
 body {
   font-family: "Inconsolata", monospace;
   color: rgb(53, 53, 53);
-  background-image: url("bg.jpg");
+  background-image: url("../img/bg.jpg");
   background-size: cover;
   background-repeat: no-repeat;
   background-attachment: fixed;
@@ -22,7 +22,7 @@ body {
 }
 
 .preview {
-  color: #a3a3a3;
+  color: #818181;
   font-size: 12pt;
   overflow: hidden;
   text-overflow: clip;

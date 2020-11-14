@@ -22,6 +22,10 @@
                     <h2>{{preview}}</h2>
                 </div>
                 <div @click="clear()" class="num ac">AC</div>
+                <div @click="addnumber(Math.PI)" class="num">π</div>
+                <div @click="operate('^3')" class="num">x³</div>
+                <div @click="operate('^2')" class="num">x²</div>
+                <div @click="operate('r2')" class="num ">√x</div>
                 <div @click="invert()" class="num invert">+/-</div>
                 <div @click="operate('%')" class="num percent">%</div>
                 <div @click="operate('/')" class="num divide">÷</div>

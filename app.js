@@ -2,15 +2,20 @@ new Vue({
     el: '#app',
     data: {
         calc: '0',
+        previousnum: null,
         preview: '',
-        operation: '',
+        operator: '',
         preoperation: '',
+        fixed: null,
         operations: {
             '/': (a, b) => a / b,
-            '*' : (a , b) => a * b,
-            '-' : (a , b) => a - b,
+            '*': (a , b) => a * b,
+            '-': (a , b) => a - b,
             '+': (a, b) => a + b,
-            '%' : (a) => a / 100
+            '%': (a) => a / 100,
+            '^2': (a) => a * a,
+            '^3': (a) => a * a * a,
+            'r2': (a) => Math.sqrt(a)
         }
     },
     methods: {
@@ -32,7 +37,8 @@ new Vue({
             if(num == '.' && this.calc.includes('.')) return;
 
             if (this.preview === null) {
-                this.preview = Number(this.calc);
+                this.previousnum = +this.calc;
+                this.preview = this.calc + " " +this.operator;
                 this.updateCalc('0');
             }
 
@@ -46,36 +52,47 @@ new Vue({
         clear() {
             if (this.calc === '0') {
                 this.preview = '';
+                this.previousnum = '';
             }
             this.updateCalc('0');
-            this.operation = '';
+            this.fixed = null;
+            this.operator = '';
         },
         invert() {
             this.updateCalc(this.calc * -1);
         },
-        operate(operator) {
+        operate(actualoperator) {
 
-            if (operator == '%') {
-                const value = this.operations[operator](+this.calc);;
+            if (actualoperator == '%' || actualoperator == '^2' || actualoperator == '^3' || actualoperator== 'r2') {
+                const value = this.operations[actualoperator](+this.calc);
                 this.updateCalc(value);
-                operator = '';
-            }else if (this.operation != '' && this.preview != '' && this.preview != null) {
+                return
+            } else if (this.operator != '' && this.previousnum != '' && this.preview != null) {
                 this.equals();
+                
             }
             
+            this.fixed = null;
+            this.previousnum = '';
             this.preview = null; 
-            this.operation = operator; 
+            this.operator = actualoperator; 
 
         },
         equals() {
-            
-            this.preoperation = this.preview + ' ' + this.operation + ' ' + this.calc;
+            if (this.operator != '') {
+                if (this.fixed == null) {
+                    this.preoperation = this.previousnum + ' ' + this.operator + ' ' + this.calc;
+                    const value = this.operations[this.operator](+this.previousnum, +this.calc);   
+                    this.fixed = this.calc;
 
-            const value = this.operations[this.operation](+this.preview, +this.calc);
+                    this.updateCalc(value);
+                } else {
+                    this.preoperation = this.calc + ' ' + this.operator + ' ' + this.fixed;
+                    const value = this.operations[this.operator](+this.calc, +this.fixed);   
 
-            this.updateCalc(value);
-
-            this.operation = '';
+                    this.updateCalc(value);
+                }
+            }            
 
             this.preview = this.preoperation;
         }

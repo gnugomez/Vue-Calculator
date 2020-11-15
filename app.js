@@ -52,7 +52,7 @@ new Vue({
         clear() {
             if (this.calc === '0') {
                 this.preview = '';
-                this.previousnum = '';
+                this.previousnum = null;
             }
             this.updateCalc('0');
             this.fixed = null;
@@ -67,13 +67,13 @@ new Vue({
                 const value = this.operations[actualoperator](+this.calc);
                 this.updateCalc(value);
                 return
-            } else if (this.operator != '' && this.previousnum != '' && this.preview != null) {
+            } else if (this.operator != '' && this.previousnum != null && this.preview != null) {
                 this.equals();
                 
             }
             
             this.fixed = null;
-            this.previousnum = '';
+            this.previousnum = null;
             this.preview = null; 
             this.operator = actualoperator; 
 
@@ -84,6 +84,8 @@ new Vue({
                     this.preoperation = this.previousnum + ' ' + this.operator + ' ' + this.calc;
                     const value = this.operations[this.operator](+this.previousnum, +this.calc);   
                     this.fixed = this.calc;
+
+                    this.previousnum = null;
 
                     this.updateCalc(value);
                 } else {

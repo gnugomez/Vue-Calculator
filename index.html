@@ -17,37 +17,38 @@
             <div class="calc-box align-v align-h">
                 <div ref="display" class="header">
                     <span ref="displayText" style="font-size:50px;">{{calc}}</span>
+                    <div class="preview">
+                        <h2>{{preview}}</h2>
+                    </div>
                 </div>
-                <div class="preview">
-                    <h2>{{preview}}</h2>
-                </div>
-                <div @click="clear()" class="num ac">AC</div>
-                <div @click="addnumber(Math.PI)" class="num">π</div>
-                <div @click="operate('^3')" class="num">x³</div>
-                <div @click="operate('^2')" class="num">x²</div>
-                <div @click="operate('r2')" class="num ">√x</div>
-                <div @click="invert()" class="num invert">+/-</div>
-                <div @click="operate('%')" class="num percent">%</div>
-                <div @click="operate('/')" class="num divide">÷</div>
-                <div @click="addnumber('7')" class="num">7</div>
-                <div @click="addnumber('8')" class="num">8</div>
-                <div @click="addnumber('9')" class="num">9</div>
-                <div @click="addnumber('4')" class="num">4</div>
-                <div @click="addnumber('5')" class="num">5</div>
-                <div @click="addnumber('6')" class="num">6</div>
-                <div @click="addnumber('1')" class="num">1</div>
-                <div @click="addnumber('2')" class="num">2</div>
-                <div @click="addnumber('3')" class="num">3</div>
-                <div @click="addnumber('0')" class="num zero">0</div>
-                <div @click="addnumber('.')" class="num">.</div>
-                <div @click="operate('*')" class="num multiply">×</div>
-                <div @click="operate('-')" class="num substract">-</div>
-                <div @click="operate('+')" class="num add">+</div>
-                <div @click="equals()" class="num equal">=</div>
+                <button @click="clear()" class="num ac">AC</button>
+                <button @click="addnumber(Math.PI)" class="num">π</button>
+                <button @click="operate('^3')" class="num">x³</button>
+                <button @click="operate('^2')" class="num">x²</button>
+                <button @click="operate('r2')" class="num ">√x</button>
+                <button @click="invert()" class="num invert">+/-</button>
+                <button @click="operate('%')" class="num percent">%</button>
+                <button @click="operate('/')" class="num divide">÷</button>
+                <button @click="addnumber('7')" class="num">7</button>
+                <button @click="addnumber('8')" class="num">8</button>
+                <button @click="addnumber('9')" class="num">9</button>
+                <button @click="addnumber('4')" class="num">4</button>
+                <button @click="addnumber('5')" class="num">5</button>
+                <button @click="addnumber('6')" class="num">6</button>
+                <button @click="addnumber('1')" class="num">1</button>
+                <button @click="addnumber('2')" class="num">2</button>
+                <button @click="addnumber('3')" class="num">3</button>
+                <button @click="addnumber('0')" class="num zero">0</button>
+                <button @click="addnumber('.')" class="num">.</button>
+                <button @click="operate('*')" class="num multiply">×</button>
+                <button @click="operate('-')" class="num substract">-</button>
+                <button @click="operate('+')" class="num add">+</button>
+                <button @click="equals()" class="num equal">=</button>
             </div>
         </div>
     </div>
 
     <script src="app.js"></script>
+    <script src=""></script>
 </body>
 </html>

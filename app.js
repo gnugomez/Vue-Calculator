@@ -49,7 +49,9 @@ new Vue({
         },
         addnumber(num) {
 
-            if (this.calc == '0' || this.clearnext == true) {
+            if (num == '.' && this.calc.includes('.')) return;
+
+            if ((this.calc == '0' || this.clearnext == true) && num != '.') {
                 this.updateCalc(num);
                 this.clearnext = false;
 
@@ -75,15 +77,14 @@ new Vue({
 
         },
         operate(actualoperator) {
-            console.log(isNaN(this.preview.charAt(this.preview.length - 1)));
-            console.log(this.clearnext);
 
             if (this.preview != '' && this.clearnext == false) {
                 this.preoperation = this.preview;
                 this.updatePreview(this.preoperation + ' ' + this.calc + ' ' + actualoperator);
                 this.clearnext = true;
-            }else if (isNaN(this.preview.charAt(this.preview.length - 1))) {
-                this.preview.replace(/.$/, actualoperator);
+            } else if (isNaN(this.preview.charAt(this.preview.length - 1))) {
+                this.preview = this.preview.slice(0, -1);
+                this.preview += actualoperator;
             } else {
                 this.updatePreview(this.calc + ' ' + actualoperator);
                 this.clearnext = true;

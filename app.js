@@ -2,7 +2,7 @@ new Vue({
     el: '#app',
     data: {
         calc: '0',
-        previousnum: null,
+        clearnext: false,
         preview: '',
         operator: '',
         preoperation: '',
@@ -33,70 +33,72 @@ new Vue({
                 
             })
         },
+        updatePreview(val) {
+            this.preview = val;
+            this.$nextTick(() => {
+                let fontSize = 20;
+                if (this.preview.length < 10) {
+                    this.$refs.displayPreview.setAttribute('style', 'font-size:' + fontSize + 'px')
+                }
+                while (this.$refs.displayPreview.offsetWidth + 40 > this.$refs.display.offsetWidth) {
+                    fontSize--;
+                    this.$refs.displayPreview.setAttribute('style', 'font-size:' + fontSize + 'px')
+                }
+                
+            })
+        },
         addnumber(num) {
-            if(num == '.' && this.calc.includes('.')) return;
 
-            if (this.preview === null) {
-                this.previousnum = +this.calc;
-                this.preview = this.calc + " " +this.operator;
-                this.updateCalc('0');
-            }
+            if (this.calc == '0' || this.clearnext == true) {
+                this.updateCalc(num);
+                this.clearnext = false;
 
-            if (this.calc == '0' && num != '.') {
-                this.updateCalc('');
-                this.updateCalc(this.calc + num);
+                this.operator = null;
             } else {
-                this.updateCalc(this.calc + num);
+                this.updateCalc(this.calc + num);  
+                
+                this.operator = null;
             }
+
         },
         clear() {
-            if (this.calc === '0') {
-                this.preview = '';
-                this.previousnum = null;
+
+            if (this.calc == '0') {
+                this.updatePreview('');
             }
             this.updateCalc('0');
-            this.fixed = null;
-            this.operator = '';
+
         },
         invert() {
+
             this.updateCalc(this.calc * -1);
+
         },
         operate(actualoperator) {
+            console.log(isNaN(this.preview.charAt(this.preview.length - 1)));
+            console.log(this.clearnext);
 
-            if (actualoperator == '%' || actualoperator == '^2' || actualoperator == '^3' || actualoperator== 'r2') {
-                const value = this.operations[actualoperator](+this.calc);
-                this.updateCalc(value);
-                return
-            } else if (this.operator != '' && this.previousnum != null && this.preview != null) {
-                this.equals();
-                
+            if (this.preview != '' && this.clearnext == false) {
+                this.preoperation = this.preview;
+                this.updatePreview(this.preoperation + ' ' + this.calc + ' ' + actualoperator);
+                this.clearnext = true;
+            }else if (isNaN(this.preview.charAt(this.preview.length - 1))) {
+                this.preview.replace(/.$/, actualoperator);
+            } else {
+                this.updatePreview(this.calc + ' ' + actualoperator);
+                this.clearnext = true;
             }
-            
-            this.fixed = null;
-            this.previousnum = null;
-            this.preview = null; 
-            this.operator = actualoperator; 
 
         },
         equals() {
-            if (this.operator != '') {
-                if (this.fixed == null) {
-                    this.preoperation = this.previousnum + ' ' + this.operator + ' ' + this.calc;
-                    const value = this.operations[this.operator](+this.previousnum, +this.calc);   
-                    this.fixed = this.calc;
 
-                    this.previousnum = null;
+            if (this.preview != '' && isNaN(this.preview.charAt(this.preview.length - 1))) {
+                this.updatePreview(this.preview + ' ' +this.calc);
+                this.updateCalc(eval(this.preview))
+                this.operator = null;
+                this.clearnext = true;
+            }
 
-                    this.updateCalc(value);
-                } else {
-                    this.preoperation = this.calc + ' ' + this.operator + ' ' + this.fixed;
-                    const value = this.operations[this.operator](+this.calc, +this.fixed);   
-
-                    this.updateCalc(value);
-                }
-            }            
-
-            this.preview = this.preoperation;
         }
 
     }

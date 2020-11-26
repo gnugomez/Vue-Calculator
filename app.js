@@ -13,7 +13,7 @@ new Vue({
         const self = this
         window.addEventListener("keypress", function(e) {
         // use self instead of this in here
-            console.log(e.key)
+            console.log(key)
             if (!isNaN(e.key)) {
                 self.addnumber(e.key)
             } else if (e.key == "Backspace") {

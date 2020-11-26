@@ -7,14 +7,19 @@ new Vue({
         preview: '',
         operator: '',
         preoperation: '',
-        fixed: null,
+        operations: {
+            '%': (a) => a / 100,
+            '^2': (a) => a * a,
+            '^3': (a) => a * a * a,
+            'r2': (a) => Math.sqrt(a)
+        }
     },
     mounted() {
         const self = this
         window.addEventListener("keypress", function(e) {
         // use self instead of this in here
             console.log(e)
-            if (!isNaN(e.key)) {
+            if (!isNaN(e.key) || e.key == "." || e.key == "(" || e.key == ")") {
                 self.addnumber(e.key)
             } else if (e.key == "Backspace") {
                 self.clear()
@@ -37,8 +42,7 @@ new Vue({
                 while (this.$refs.displayText.offsetWidth + 35 > this.$refs.display.offsetWidth) {
                     fontSize--
                     this.$refs.displayText.setAttribute('style', 'font-size:' + fontSize + 'px')
-                }
-                
+                }  
             })
         },
         updatePreview(val) {
@@ -52,7 +56,6 @@ new Vue({
                     fontSize--
                     this.$refs.displayPreview.setAttribute('style', 'font-size:' + fontSize + 'px')
                 }
-                
             })
         },
         addnumber(num) {
@@ -60,6 +63,8 @@ new Vue({
             if (num == '.' && this.calc.includes('.')) return
             if (num  == '(' && this.calc.includes('(')) return
             if (num == ')' && this.calc.includes(')')) return
+            if (num == ')' && !this.calc.includes('(') && !this.preview.includes('(')) return
+
             
             if (this.clearpreview == true) {
                 this.updatePreview('')
@@ -116,10 +121,26 @@ new Vue({
             }
 
         },
+        selfoperate(operator) {
+            const value = this.operations[operator](this.calc)
+            this.updateCalc(value)
+        },
         equals() {
 
             if (this.preview != '' && isNaN(this.preview.charAt(this.preview.length - 1))) {
-                this.updatePreview(this.preview + ' ' +this.calc)
+                this.updatePreview(this.preview + ' ' + this.calc)
+
+                const openpharenCount = (this.preview.match(/\(/g) || []).length
+                const closepharenCount = (this.preview.match(/\)/g) || []).length
+                
+                if (openpharenCount > closepharenCount) {
+                    console.log("hola")
+                    for (let i = 0; i < openpharenCount - closepharenCount; i++) {
+                        this.updatePreview(this.preview + ')')
+                        
+                    }
+                }
+
                 this.updateCalc(eval(this.preview).toString())
                 this.operator = null
                 this.clearnext = true

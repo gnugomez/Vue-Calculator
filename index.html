@@ -27,11 +27,11 @@
                 <button @click="addnumber('')" class="num secondary"></button>
                 <button @click="addnumber('')" class="num secondary"></button>
                 <button @click="addnumber(Math.PI.toString())" class="num secondary">π</button>
-                <button @click="operate('^3')" class="num secondary">x³</button>
-                <button @click="operate('^2')" class="num secondary">x²</button>
-                <button @click="operate('r2')" class="num secondary">√x</button>
+                <button @click="selfoperate('^3')" class="num secondary">x³</button>
+                <button @click="selfoperate('^2')" class="num secondary">x²</button>
+                <button @click="selfoperate('r2')" class="num secondary">√x</button>
                 <button @click="invert()" class="num invert secondary">+/-</button>
-                <button @click="operate('%')" class="num percent secondary">%</button>
+                <button @click="selfoperate('%')" class="num percent secondary">%</button>
                 <button @click="operate('/')" class="num divide">÷</button>
                 <button @click="addnumber('7')" class="num">7</button>
                 <button @click="addnumber('8')" class="num">8</button>

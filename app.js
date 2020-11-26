@@ -7,7 +7,23 @@ new Vue({
         preview: '',
         operator: '',
         preoperation: '',
-        fixed: null
+        fixed: null,
+    },
+    mounted() {
+        const self = this
+        window.addEventListener("keypress", function(e) {
+        // use self instead of this in here
+            if (!isNaN(e.key)) {
+                self.addnumber(e.key)
+            } else if (e.key == "Backspace") {
+                self.clear()
+            } else if (e.key == "+" || e.key == "-" || e.key == "*" || e.key == "/") {
+                self.operate(e.key)
+            } else if (e.key == "Enter") {
+                self.equals()
+            }
+
+        });
     },
     methods: {
         updateCalc(val) {
@@ -31,7 +47,7 @@ new Vue({
                 if (this.preview.length < 10) {
                     this.$refs.displayPreview.setAttribute('style', 'font-size:' + fontSize + 'px')
                 }
-                while (this.$refs.displayPreview.offsetWidth + 40 > this.$refs.display.offsetWidth) {
+                while (this.$refs.displayPreview.offsetWidth + 45 > this.$refs.display.offsetWidth) {
                     fontSize--
                     this.$refs.displayPreview.setAttribute('style', 'font-size:' + fontSize + 'px')
                 }

@@ -24,8 +24,8 @@ body {
 }
 
 .preview {
-  height: 40px;
-  line-height: 60px;
+  height: 10px;
+  line-height: 10px;
   opacity: 0.3;
   color: #313131;
   font-size: 13pt;
@@ -57,25 +57,30 @@ body {
 
 .calc-box {
   overflow: hidden;
-  padding: 20px;
+  padding: 16px;
   border-radius: 25px;
 
   display: grid;
-  grid-template-rows: repeat(6, minmax(50px, auto));
-  grid-template-columns: repeat(4, 50px);
-  grid-gap: 12px;
+  grid-template-rows: repeat(6, minmax(55px, auto));
+  grid-template-columns: repeat(4, 55px);
+  grid-gap: 10px;
 
   background-color: rgba(255, 255, 255, 0.336);
-  backdrop-filter: saturate(180%) blur(20px);
-  -webkit-backdrop-filter: saturate(180%) blur(20px);
+  backdrop-filter: saturate(180%) blur(15px);
+  -webkit-backdrop-filter: saturate(180%) blur(15px);
+}
+
+.secondary {
+  opacity: 0.6;
 }
 
 .num {
+  font-family: "Inconsolata", monospace;
   border: none;
-  line-height: 50px;
+  line-height: 55px;
   background-color: rgba(255, 255, 255, 0.295);
-  font-size: 18px;
-  transition: 0.2s;
+  font-size: 20px;
+  transition: 0.3s;
   border-radius: 13px;
   display: flex;
   align-items: center;
@@ -84,7 +89,7 @@ body {
   text-align: center;
   text-decoration: none;
   outline: none;
-  font-weight: 450;
+  font-weight: 300;
   -webkit-box-shadow: 0px 0px 40px -18px rgba(0, 0, 0, 0);
   -moz-box-shadow: 0px 0px 40px -18px rgba(0, 0, 0, 0);
   box-shadow: 0px 0px 40px -18px rgba(0, 0, 0, 0);
@@ -93,14 +98,16 @@ body {
 .num:active {
   color: rgb(27, 3, 3);
   background-color: rgba(255, 255, 255, 0.11);
+  transform: scale(0.8) !important;
   backdrop-filter: saturate(220%);
   -webkit-backdrop-filter: saturate(150%);
 }
 .num:hover {
-  transform: scale(1.1);
-  -webkit-box-shadow: 0px 0px 40px 0px rgba(0, 0, 0, 0.18);
-  -moz-box-shadow: 0px 0px 40px 0px rgba(0, 0, 0, 0.18);
-  box-shadow: 0px 0px 40px 0px rgba(0, 0, 0, 0.18);
+  opacity: 1;
+  transform: scale(1.09);
+  -webkit-box-shadow: 0px 0px 25px 0px rgba(0, 0, 0, 0.15);
+  -moz-box-shadow: 0px 0px 25px 0px rgba(0, 0, 0, 0.15);
+  box-shadow: 0px 0px 25px 0px rgba(0, 0, 0, 0.15);
 }
 
 .multiply,
@@ -136,4 +143,35 @@ body {
 }
 .ac:active {
   background-color: rgba(252, 30, 30, 0.507) !important;
+}
+.ac:hover {
+  background-color: rgba(252, 30, 30, 0.507) !important;
+}
+
+@media (prefers-color-scheme: dark) {
+  body {
+    background-image: url("../img/bg_dark.jpg");
+  }
+  .calc-box {
+    background-color: rgba(0, 0, 0, 0.199);
+  }
+  .num {
+    color: white;
+    background-color: rgba(0, 0, 0, 0.199);
+  }
+  .num:active {
+    color: white !important;
+  }
+  .header {
+    color: white;
+    background-color: rgba(0, 0, 0, 0.199) !important;
+  }
+  .preview {
+    color: #ffffff;
+  }
+  .num:hover {
+    -webkit-box-shadow: 0px 0px 25px 0px rgba(187, 187, 187, 0.171);
+    -moz-box-shadow: 0px 0px 25px 0px rgba(187, 187, 187, 0.171);
+    box-shadow: 0px 0px 25px 0px rgba(187, 187, 187, 0.171);
+  }
 }

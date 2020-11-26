@@ -22,7 +22,11 @@
                     </div>
                 </div>
                 <button @click="clear()" class="num ac">AC</button>
-                <button @click="addnumber(Math.PI)" class="num">π</button>
+                <button @click="addnumber('(')" class="num">(</button>
+                <button @click="addnumber(')')" class="num">)</button>
+                <button @click="addnumber('')" class="num"></button>
+                <button @click="addnumber('')" class="num"></button>
+                <button @click="addnumber(Math.PI.toString())" class="num">π</button>
                 <button @click="operate('^3')" class="num">x³</button>
                 <button @click="operate('^2')" class="num">x²</button>
                 <button @click="operate('r2')" class="num ">√x</button>

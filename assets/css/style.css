@@ -75,6 +75,7 @@ body {
 }
 
 .num {
+  touch-action: manipulation;
   font-family: "Inconsolata", monospace;
   border: none;
   line-height: 55px;

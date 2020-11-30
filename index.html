@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="./assets/img/fav.png" />
     <link rel="stylesheet" href="./assets/css/style.css">
     <link href="https://fonts.googleapis.com/css2?family=Inconsolata:wght@600&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/vue@2.6.12"></script>
@@ -22,11 +23,9 @@
                     <span ref="displayText" style="font-size:50px;">{{calc}}</span>
                 </div>
                 <button @keyup.alt.67="clear" @click="clear()" class="num ac secondary">AC</button>
+                <button @click="addnumber(Math.PI.toString())" class="num secondary">π</button>
                 <button @click="addnumber('(')" class="num secondary">(</button>
                 <button @click="addnumber(')')" class="num secondary">)</button>
-                <button @click="addnumber('')" class="num secondary"></button>
-                <button @click="addnumber('')" class="num secondary"></button>
-                <button @click="addnumber(Math.PI.toString())" class="num secondary">π</button>
                 <button @click="selfoperate('^3')" class="num secondary">x³</button>
                 <button @click="selfoperate('^2')" class="num secondary">x²</button>
                 <button @click="selfoperate('r2')" class="num secondary">√x</button>
@@ -52,6 +51,9 @@
         </div>
     </div>
 
+    <footer>
+        <span>Made with <i style="color:rgb(250, 24, 80);">&hearts;</i> by <a target="blank" href="https://github.com/gnugomez">gnugomez</a>.</span>
+    </footer>
     <script src="app.js"></script>
     <script src="">
 

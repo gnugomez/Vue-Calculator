@@ -123,7 +123,7 @@ new Vue({
         },
         selfoperate(operator) {
             const value = this.operations[operator](this.calc)
-            this.updateCalc(value)
+            this.updateCalc(value.toString())
         },
         equals() {
 

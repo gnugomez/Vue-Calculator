@@ -7,6 +7,20 @@
   background: none;
 }
 
+footer {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: 20px;
+  color: white;
+  text-align: center;
+}
+footer a {
+  text-decoration: none;
+  color: white;
+}
+
 body {
   font-family: "Inconsolata", monospace;
   color: rgb(53, 53, 53);
@@ -19,13 +33,19 @@ body {
 
 .header {
   font-size: 50px;
+  background-color: rgba(255, 255, 255, 0.26);
+  border-radius: 13px;
 }
 
 .preview {
-  color: #818181;
-  font-size: 12pt;
+  height: 10px;
+  line-height: 10px;
+  opacity: 0.3;
+  color: #313131;
+  font-size: 13pt;
   overflow: hidden;
   text-overflow: clip;
+  white-space: nowrap;
 }
 
 .preview,
@@ -51,24 +71,31 @@ body {
 
 .calc-box {
   overflow: hidden;
-  padding: 20px;
-  border-radius: 20px;
+  padding: 16px;
+  border-radius: 25px;
 
   display: grid;
-  grid-template-rows: repeat(6, minmax(60px, auto));
-  grid-template-columns: repeat(4, 60px);
-  grid-gap: 12px;
+  grid-template-rows: repeat(6, minmax(55px, auto));
+  grid-template-columns: repeat(4, 55px);
+  grid-gap: 10px;
 
-  background-color: rgba(255, 255, 255, 0.13);
-  backdrop-filter: saturate(180%) blur(20px);
-  -webkit-backdrop-filter: saturate(180%) blur(20px);
+  background-color: rgba(255, 255, 255, 0.336);
+  backdrop-filter: saturate(180%) blur(15px);
+  -webkit-backdrop-filter: saturate(180%) blur(15px);
+}
+
+.secondary {
+  opacity: 0.6;
 }
 
 .num {
-  line-height: 60px;
+  touch-action: manipulation;
+  font-family: "Inconsolata", monospace;
+  border: none;
+  line-height: 55px;
   background-color: rgba(255, 255, 255, 0.295);
-  font-size: 25px;
-  transition: 0.4s;
+  font-size: 20px;
+  transition: 0.3s;
   border-radius: 13px;
   display: flex;
   align-items: center;
@@ -77,20 +104,25 @@ body {
   text-align: center;
   text-decoration: none;
   outline: none;
-
+  font-weight: 300;
   -webkit-box-shadow: 0px 0px 40px -18px rgba(0, 0, 0, 0);
   -moz-box-shadow: 0px 0px 40px -18px rgba(0, 0, 0, 0);
   box-shadow: 0px 0px 40px -18px rgba(0, 0, 0, 0);
 }
 
-.num:hover {
-  cursor: pointer;
-
+.num:active {
+  color: rgb(27, 3, 3);
+  background-color: rgba(255, 255, 255, 0.11);
+  transform: scale(0.8) !important;
   backdrop-filter: saturate(220%);
   -webkit-backdrop-filter: saturate(150%);
-  -webkit-box-shadow: 0px 0px 40px -18px rgba(0, 0, 0, 0.75);
-  -moz-box-shadow: 0px 0px 40px -18px rgba(0, 0, 0, 0.75);
-  box-shadow: 0px 0px 40px -18px rgba(0, 0, 0, 0.75);
+}
+.num:hover {
+  opacity: 1;
+  transform: scale(1.09);
+  -webkit-box-shadow: 0px 0px 25px 0px rgba(0, 0, 0, 0.15);
+  -moz-box-shadow: 0px 0px 25px 0px rgba(0, 0, 0, 0.15);
+  box-shadow: 0px 0px 25px 0px rgba(0, 0, 0, 0.15);
 }
 
 .multiply,
@@ -100,6 +132,9 @@ body {
 .divide {
   background-color: #e9812ba9 !important;
   color: rgb(68, 34, 12);
+}
+.ac {
+  grid-column: 1/4;
 }
 .zero {
   grid-column: 1/3;
@@ -121,10 +156,40 @@ body {
   grid-column: 4;
   grid-row: 8;
 }
-.header,
-.preview {
+.header {
   grid-column: 1/5;
+}
+.ac:active {
+  background-color: rgba(252, 30, 30, 0.507) !important;
 }
 .ac:hover {
   background-color: rgba(252, 30, 30, 0.507) !important;
+}
+
+@media (prefers-color-scheme: dark) {
+  body {
+    background-image: url("../img/bg_dark.jpg");
+  }
+  .calc-box {
+    background-color: rgba(0, 0, 0, 0.199);
+  }
+  .num {
+    color: white;
+    background-color: rgba(0, 0, 0, 0.199);
+  }
+  .num:active {
+    color: white !important;
+  }
+  .header {
+    color: white;
+    background-color: rgba(0, 0, 0, 0.199) !important;
+  }
+  .preview {
+    color: #ffffff;
+  }
+  .num:hover {
+    -webkit-box-shadow: 0px 0px 25px 0px rgba(187, 187, 187, 0.171);
+    -moz-box-shadow: 0px 0px 25px 0px rgba(187, 187, 187, 0.171);
+    box-shadow: 0px 0px 25px 0px rgba(187, 187, 187, 0.171);
+  }
 }
